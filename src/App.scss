@@ -3,3 +3,15 @@ body {
   padding: 0;
   margin: 0;
 }
+
+.app-container {
+  .header-container {
+    .navbar-nav {
+      .nav-link {
+        &.active {
+          color: #00bfff;
+        }
+      }
+    }
+  }
+}
