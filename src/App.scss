@@ -4,14 +4,76 @@ body {
   margin: 0;
 }
 
+@media (min-width: 1350px){
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1300px;
+  }
+}
+
 .app-container {
   .header-container {
-    .navbar-nav {
+
+    .btn-login {
+      border-radius: 5px;
+      margin-right: 15px;
+      padding: 0 15px;
+      border: 1px solid;
+      height: 40px;
+    }
+
+    .btn-signup {
+      border-radius: 5px;
+      padding: 0 15px;
+      background-color: #303030;
+      color: white;
+      height: 40px;
+
+      &:hover {
+        background-color: black;
+      }
+    }
+
+    .navbar {
+      padding-top: 20px;
       z-index: 10;
-      opacity: 0.6;
+      background-color: rgba(0,0,0,0) !important;
+
       .nav-link {
         &.active {
           color: #00bfff;
+        }
+      }
+    }
+  }
+  .homepage-container {
+    .homepage-content {
+      padding: 100px;
+      width: 50%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .title-1 {
+        font-size: 35px;
+        font-weight: 600;
+      }
+
+      .title-2 {
+        font-size: 22px;
+      }
+
+      .title-3 {
+        button {
+          border-radius: 5px;
+          padding: 0 15px;
+          background-color: #303030;
+          color: white;
+          height: 40px;
+
+          &:hover {
+            background-color: black;
+          }
         }
       }
     }
