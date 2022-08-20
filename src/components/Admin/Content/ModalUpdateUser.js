@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
 import { toast } from 'react-toastify';
-import { postCreateNewUser } from '../../../services/apiService';
+import { putUpdateUser } from '../../../services/apiService';
 import _ from 'lodash';
 
 const ModalUpdateUser = (props) => {
@@ -17,6 +17,7 @@ const ModalUpdateUser = (props) => {
     setRole("USER");
     setImage("");
     setPreviewImage("");
+    props.resetUpdateData();
   };
 
   const [email, setEmail] = useState("");
@@ -40,48 +41,43 @@ const ModalUpdateUser = (props) => {
     }
   }, [dataUpdate]);
 
-  const handleUploadImage = (event) => {
-    if (event.target && event.target.files && event.target.files[0]) {
-      setPreviewImage(URL.createObjectURL(event.target.files[0]));
-      setImage(event.target.files[0]);
-    } else {
-      // setPreviewImage("");
-    }
-  }
-
-  const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-  };
-
-  const handSubmitCreateUser = async () => {
-    // validate
-    const isValidEmail = validateEmail(email); 
-
-    if (!isValidEmail) {
-      toast.error('Invalid email')
-      return;
+    const handleUploadImage = (event) => {
+        if (event.target && event.target.files && event.target.files[0]) {
+        setPreviewImage(URL.createObjectURL(event.target.files[0]));
+        setImage(event.target.files[0]);
+        } else {
+        // setPreviewImage("");
+        }
     }
 
-    if (!password) {
-      toast.error('Invalid password')
-      return;
-    }
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
 
-    let data = await postCreateNewUser(email, password, username, role, image);
-    if (data && data.EC === 0) {
-      toast.success(data.EM);
-      handleClose();
-      await props.fetchListUsers();
-    }
+    const handSubmitCreateUser = async () => {
+        // validate
+        const isValidEmail = validateEmail(email); 
 
-    if (data && data.EC !== 0) {
-      toast.error(data.EM);
+        if (!isValidEmail) {
+            toast.error('Invalid email')
+            return;
+        }
+
+        let data = await putUpdateUser(dataUpdate.id ,username, role, image);
+        if (data && data.EC === 0) {
+            toast.success(data.EM);
+            handleClose();
+            await props.fetchListUsers();
+        }
+
+        if (data && data.EC !== 0) {
+            toast.error(data.EM);
+        }
     }
-  }
 
   return (
     <>
