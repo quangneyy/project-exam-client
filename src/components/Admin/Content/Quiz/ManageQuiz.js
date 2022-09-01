@@ -9,9 +9,9 @@ import QuizQA from './QuizQA';
 import AssignQuiz from './AssignQuiz';
 
 const options = [
-  { value: 'EASY', label: 'Chocolate' },
-  { value: 'MEDIUM', label: 'Strawberry' },
-  { value: 'HARD', label: 'Vanilla' }
+  { value: 'EASY', label: 'EASY' },
+  { value: 'MEDIUM', label: 'MEDIUM' },
+  { value: 'HARD', label: 'HARD' }
 ];
 
 const ManageQuiz = () => {
